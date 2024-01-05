@@ -54,7 +54,7 @@ class EnvVar:
         prefix = "!" if self.negated else ""
         return f"{prefix}{self.key}"
 
-    def get(self, env) -> str:
+    def get(self, env: dict[str, str]) -> str:
         """Get env value.
 
         Args:

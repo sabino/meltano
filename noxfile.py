@@ -51,6 +51,7 @@ pytest_deps = (
     "moto",
     "pytest",
     "pytest-asyncio",
+    "pytest-benchmark",
     "pytest-cov",
     "pytest-docker",
     "pytest-httpserver",

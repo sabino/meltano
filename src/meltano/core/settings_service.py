@@ -627,7 +627,7 @@ class SettingsService(metaclass=ABCMeta):  # noqa: WPS214
     # Callers should be updated to not use it, and then it should be removed.
     def setting_env_vars(
         self,
-        setting_def,
+        setting_def: SettingDefinition,
         for_writing=False,  # noqa: ARG002
     ):
         """Get environment variables for the given setting definition.
