@@ -72,7 +72,7 @@ class Airflow(BasePlugin):
             invoker: the active PluginInvoker
         """
         airflow_cfg_path = invoker.files["config"]
-        logging.debug(f"Generated default '{str(airflow_cfg_path)}'")  # noqa: G004
+        logging.debug("Generated default '%s'", airflow_cfg_path)
 
         # open the configuration and update it
         # now we let's update the config to use our stubs
@@ -80,16 +80,16 @@ class Airflow(BasePlugin):
 
         with airflow_cfg_path.open() as airflow_cfg_file_to_read:
             airflow_cfg.read_file(airflow_cfg_file_to_read)
-            logging.debug(f"Loaded '{str(airflow_cfg_path)}'")  # noqa: G004
+            logging.debug("Loaded '%s'", airflow_cfg_path)
 
         config = invoker.plugin_config_processed
         for section, section_config in config.items():
             airflow_cfg[section].update(section_config)
-            logging.debug(f"\tUpdated section [{section}] with {section_config}")  # noqa: G004
+            logging.debug("\tUpdated section [%s] with %s", section, section_config)
 
         with airflow_cfg_path.open("w") as airflow_cfg_file_to_write:
             airflow_cfg.write(airflow_cfg_file_to_write)
-            logging.debug(f"Saved '{str(airflow_cfg_path)}'")  # noqa: G004
+            logging.debug("Saved '%s'", airflow_cfg_path)
 
     @hook("before_install")
     async def setup_env(self, *args, **kwargs):  # noqa: ARG002
@@ -183,4 +183,4 @@ class Airflow(BasePlugin):
         config_file = invoker.files["config"]
         with suppress(FileNotFoundError):
             config_file.unlink()
-            logging.debug(f"Deleted configuration at {config_file}")  # noqa: G004
+            logging.debug("Deleted configuration at %s", config_file)

@@ -102,11 +102,11 @@ class Superset(BasePlugin):
                 ],
             )
 
-            logger.info(f"Merged in config from {custom_config_path}")  # noqa: G004
+            logger.info("Merged in config from %s", custom_config_path)
         config_path = invoker.files["config"]
         with open(config_path, "w") as config_file:
             config_file.write("\n".join(config_script_lines))
-        logging.debug(f"Created configuration at {config_path}")  # noqa: G004
+        logging.debug("Created configuration at %s", config_file)
 
     @hook("before_invoke")
     async def db_upgrade_hook(
@@ -185,4 +185,4 @@ class Superset(BasePlugin):
         config_file = invoker.files["config"]
         with suppress(FileNotFoundError):
             config_file.unlink()
-            logging.debug(f"Deleted configuration at {config_file}")  # noqa: G004
+            logging.debug("Deleted configuration at %s", config_file)

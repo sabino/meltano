@@ -173,8 +173,10 @@ class Manifest:  # noqa: WPS214
                     str(instance_path),
                 )
                 logger.warning(
-                    f"Failed to validate {instance_name} against Meltano manifest "  # noqa: G004
-                    f"schema ({MANIFEST_SCHEMA_PATH}):\n{jsonschema_checker_message}",
+                    "Failed to validate %s against Meltano manifest schema (%s):\n%s",
+                    instance_name,
+                    MANIFEST_SCHEMA_PATH,
+                    jsonschema_checker_message,
                 )
 
     @cached_property

@@ -90,8 +90,9 @@ def project_engine(
         + (parsed_db_uri.hostname or ""),
     ).geturl()
     logging.debug(
-        f"Creating DB engine for project at {str(project.root)!r} "  # noqa: G004
-        f"with DB URI {sanitized_db_uri!r}",
+        "Creating DB engine for project at '%s' with DB URI '%s'",
+        project.root,
+        sanitized_db_uri,
     )
 
     if database_uri is None:
@@ -143,14 +144,16 @@ def connect(
         except OperationalError:
             if attempt >= max_retries:
                 logging.error(
-                    f"Could not connect to the database after {attempt} "  # noqa: G004
-                    "attempts. Max retries exceeded.",
+                    "Could not connect to the database after %s attempts. Max retries exceeded.",  # noqa: E501
+                    attempt,
                 )
                 raise
             attempt += 1
             logging.info(
-                f"DB connection failed. Will retry after {retry_timeout}s. "  # noqa: G004
-                f"Attempt {attempt}/{max_retries}",
+                "DB connection failed. Will retry after %ss. " "Attempt %d/%d",
+                retry_timeout,
+                attempt,
+                max_retries,
             )
             time.sleep(retry_timeout)
 
@@ -210,9 +213,9 @@ def ensure_schema_exists(
             conn.execute(grant_select_schema)
             conn.execute(grant_usage_schema)
 
-    logging.info(f"Schema {schema_name} has been created successfully.")  # noqa: G004
+    logging.info("Schema %s has been created successfully.", schema_name)
     for role in grant_roles:
-        logging.info(f"Usage has been granted for role: {role}.")  # noqa: G004
+        logging.info("Usage has been granted for role: %s.", role)
 
 
 def check_database_compatibility(engine: Engine) -> None:

@@ -79,14 +79,16 @@ def state_service_from_state_id(project: Project, state_id: str) -> StateService
         try:
             if not project.environment:
                 logger.warning(
-                    "Running state operation for environment "  # noqa: G004
-                    f"'{match['env']}' outside of an environment",
+                    "Running state operation for environment '%s' outside of an environment",  # noqa: E501
+                    match["env"],
                 )
 
             elif project.environment.name != match["env"]:
                 logger.warning(
-                    f"Environment '{match['env']}' used in state operation does "  # noqa: G004
-                    f"not match current environment '{project.environment.name}'.",
+                    "Environment '%s' used in state operation does "
+                    "not match current environment '%s'.",
+                    match["env"],
+                    project.environment.name,
                 )
 
             project.activate_environment(match["env"])
@@ -166,8 +168,10 @@ def copy_state(
     state_service.copy_state(src_state_id, dst_state_id)
 
     logger.info(
-        f"State for {dst_state_id} was successfully copied from "  # noqa: G004
-        f"{src_state_id} at {dt.utcnow():%Y-%m-%d %H:%M:%S}.",  # noqa: WPS323
+        "State for %s was successfully copied from %s at %s.",  # noqa: WPS323
+        dst_state_id,
+        src_state_id,
+        dt.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
     )
 
 
@@ -196,8 +200,10 @@ def move_state(
     state_service.move_state(src_state_id, dst_state_id)
 
     logger.info(
-        f"State for {src_state_id} was successfully moved to {dst_state_id} "  # noqa: G004
-        f"at {dt.utcnow():%Y-%m-%d %H:%M:%S}.",  # noqa: WPS323
+        "State for %s was successfully moved to %s at %s.",  # noqa: WPS323
+        src_state_id,
+        dst_state_id,
+        dt.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
     )
 
 
@@ -247,8 +253,9 @@ def merge_state(
     elif from_state_id:
         state_service.merge_state(from_state_id, state_id)
     logger.info(
-        f"State for {state_id} was successfully "  # noqa: G004
-        f"merged at {dt.utcnow():%Y-%m-%d %H:%M:%S}.",  # noqa: WPS323
+        "State for %s was successfully merged at %s.",  # noqa: WPS323
+        state_id,
+        dt.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
     )
 
 
@@ -288,8 +295,9 @@ def set_state(
     elif state:
         state_service.set_state(state_id, state)
     logger.info(
-        f"State for {state_id} was successfully set "  # noqa: G004
-        f"at {dt.utcnow():%Y-%m-%d %H:%M:%S}.",  # noqa: WPS323
+        "State for %s was successfully set at %s.",  # noqa: WPS323
+        state_id,
+        dt.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
     )
 
 

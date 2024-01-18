@@ -86,8 +86,8 @@ class BookmarkWriter:
                 "incremental state has not been updated",
             )
         else:
-            logger.info(f"Incremental state has been updated at {datetime.utcnow()}.")  # noqa: G004
-            logger.debug(f"Incremental state: {new_state}")  # noqa: G004
+            logger.info("Incremental state has been updated at %s.", datetime.utcnow())
+            logger.debug("Incremental state: %s", new_state)
 
 
 class SingerTarget(SingerPlugin):

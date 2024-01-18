@@ -311,7 +311,7 @@ class SingerTap(SingerPlugin):  # noqa: WPS214
                     f"Could not find state file {custom_state_path}",  # noqa: EM102
                 ) from err
 
-            logger.info(f"Found state in {custom_state_filename}")  # noqa: G004
+            logger.info("Found state in %s", custom_state_filename)
             return
 
         # the `state.json` is stored in a state backend
@@ -396,7 +396,7 @@ class SingerTap(SingerPlugin):  # noqa: WPS214
 
             try:
                 shutil.copy(custom_catalog_path, catalog_path)
-                logger.info(f"Found catalog in {custom_catalog_path}")  # noqa: G004
+                logger.info("Found catalog in %s", custom_catalog_path)
             except FileNotFoundError as err:
                 raise PluginExecutionError(
                     f"Could not find catalog file {custom_catalog_path}",  # noqa: EM102

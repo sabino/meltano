@@ -48,7 +48,9 @@ class PluginConfigService:
                 stubbed.append(dst)
             except FileNotFoundError:
                 logging.debug(
-                    f"Could not find {src.name} in {src.resolve()}, skipping.",  # noqa: G004
+                    "Could not find %s in %s, skipping.",
+                    src.name,
+                    src.resolve(),
                 )
 
         return stubbed

@@ -570,9 +570,11 @@ def activate_explicitly_provided_environment(
     """
     if ctx.obj.get("is_default_environment"):
         logger.info(
-            f"The default environment {ctx.obj['selected_environment']!r} will "  # noqa: G004
-            f"be ignored for `meltano {ctx.command.name}`. To configure a specific "
+            "The default environment '%s' will "
+            "be ignored for `meltano %s`. To configure a specific "
             "environment, please use the option `--environment=<environment name>`.",
+            ctx.obj["selected_environment"],
+            ctx.command.name,
         )
         project.deactivate_environment()
     else:

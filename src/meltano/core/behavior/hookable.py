@@ -115,7 +115,10 @@ class HookObject(metaclass=Hookable):
                 if hook_func.__hook__.can_fail:  # noqa: WPS609
                     logger.debug(str(err), exc_info=True)
                     logger.warning(
-                        f"{hook_name} hook '{hook_func.__name__}' has failed: {err}",  # noqa: G004
+                        "%s hook '%s' has failed: %s",
+                        hook_name,
+                        hook_func.__name__,
+                        err,
                     )
                 else:
                     raise err
